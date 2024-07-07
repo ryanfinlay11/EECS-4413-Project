@@ -12,5 +12,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EECS_4413_PROJECT }}'
-          projectId: eecs-4413-project
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RYANFINLAY4413 }}'
+          projectId: ryanfinlay4413
