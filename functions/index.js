@@ -1,19 +1,21 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+const functions = require('firebase-functions');
+const express = require('express');
+const path = require('path');
+const app = express();
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+app.use(express.json());
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+app.post('/api/hello', (req, res) => {
+    res.send('Hello World!');
+});
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+app.all('*', (req, res) => {
+    res.status(404).json({ error: 'API Call Not Found' });
+});
+
+app.use((err, req, res, next) => {
+    console.error(err.stack); // Log the error stack trace for debugging
+    res.status(500).json({ error: 'Internal Server Error' });
+});
+
+exports.api = functions.https.onRequest(app);
