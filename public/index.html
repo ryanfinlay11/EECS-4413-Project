@@ -3,6 +3,42 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Coming soon</title>
+    <title>Ryan's Hockey Shop</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <div id="top-bar">
+      <div id="logo">Ryan's Hockey Shop</div>
+      <div id="nav-buttons">
+        <button id="loginButton" onclick="login()">ryan31</button>
+        <button id="cartButton" onclick="showItemDetails('L')">Cart</button>
+      </div>
+    </div>
+
+    <div id="control-bar">
+      <select id="equipment-type">
+        <option value="allEquipment">All Equipment</option>
+        <option value="playerEquipment">Player Equipment</option>
+        <option value="goalieEquipment">Goalie Equipment</option>
+      </select>
+      <select id="sorting-type">
+        <option value="sortAlphabetical">Sort by alphabetical</option>
+        <option value="sortLowToHigh">Sort by price: low to high</option>
+        <option value="sortHighToLow">Sort by price: high to low</option>
+      </select>
+    </div>
+
+    <div id="grid-container"></div>
+
+    <div id="item-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div id="modal-item-info"></div>
+        <button id="add-to-cart" onclick="addToCart()">Add to Cart</button>
+      </div>
+    </div>
+
+    <script src="test.js"></script>
   </body>
 </html>
