@@ -32,6 +32,8 @@ function initialize() {
           </tr>
       `;
     }
+
+    updateCost();
   }
 }
 
@@ -76,7 +78,23 @@ function getItemByID(id) {
 }
 
 function updateCost() {
+  const subtotal = document.getElementById('subtotal');
+  const hst = document.getElementById('hst');
+  const total = document.getElementById('total');
 
+  let subtotalCost = 0;
+
+  for (let item of cart) {
+    subtotalCost += item.price * item.occurance;
+  }
+
+  const hstCost = subtotalCost * 0.13;
+  const totalCost = subtotalCost + hstCost;
+
+  subtotal.innerHTML = `Subtotal: $${subtotalCost.toFixed(2)}`;
+  hst.innerHTML = `HST: $${hstCost.toFixed(2)}`;
+  total.innerHTML = `Total: <b>$${totalCost.toFixed(2)}</b>`;
+  console.log("updated cost");
 }
 
 // Event listener to detect when the quantity of an item is changed
