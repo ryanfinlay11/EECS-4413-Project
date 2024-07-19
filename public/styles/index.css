@@ -3,6 +3,8 @@ body {
   overflow-x: hidden;
 }
 
+/* Header */
+
 #top-bar {
   background-image: url('https://dktix1rrcd7mv.cloudfront.net/media/images/1920x720/How-to-make-an-ice-rink-blog-header.jpg');
   background-position: 80% 20%;
@@ -30,7 +32,7 @@ body {
   gap: 10px;
 }
 
-#loginButton, #cartButton {
+#accountButton, #cartButton {
   color: rgb(255, 255, 255);
   font-size: 30px;
   width: 200px;
@@ -44,10 +46,38 @@ body {
   cursor: pointer;
 }
 
-#loginButton:hover, #cartButton:hover {
+#accountButton:hover, #cartButton:hover {
   background-color: rgb(105, 105, 105);
 }
 
+#cartButton {
+  width: 75px;
+}
+
+#cartImage {
+  width: 30px;
+  margin-top: 5px;
+  filter: invert(1);
+}
+
+#loading-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loading-image {
+  width: 300px;
+}
+
+#loading-text{
+  font-size: 30px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 0;
+}
+
+/* Sorting Bar */
 
 #control-bar {
   display: flex;
@@ -67,6 +97,7 @@ body {
   border-radius: 4px;
 }
 
+/* Item Grid */
 
 #grid-container {
   display: grid;
@@ -77,6 +108,8 @@ body {
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
 
 .grid-item {
@@ -85,6 +118,10 @@ body {
   border-radius: 4px;
   padding: 10px;
   font-family: Arial, sans-serif;
+}
+
+.grid-item:hover {
+  cursor: pointer
 }
 
 .grid-item img {
@@ -102,6 +139,7 @@ body {
   font-weight: bold;
 }
 
+/* Item Information Modal */
 
 .modal {
   display: none;
@@ -117,8 +155,10 @@ body {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
-  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
@@ -182,4 +222,75 @@ body {
 
 #add-to-cart:disabled:hover {
   cursor: not-allowed;
+}
+
+/* Account Modal */
+
+#loginButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7vh;
+}
+
+#loginToExistingAccount, #registerAccount {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  width: 250px;
+  height: 100px;
+  text-align: center;
+  box-shadow: none;
+  border: none;
+  background-color: rgb(9, 0, 136);
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 15px;
+}
+
+/* Login and Register Modal */
+
+#loginInfo, #registerInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-label {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#login-username, #login-password, #register-username, #register-password, #register-creditcard, #register-address{
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.cc-example {
+  color: #464646;
+  font-size: 15px;
+  margin-top: 0;
+  margin-bottom: 3px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#loginButton, #registerButton{
+  color: rgb(255, 255, 255);
+  margin-top: 50px;
+  font-size: 30px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  box-shadow: none;
+  border: none;
+  background-color: rgb(9, 0, 136);
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
 }

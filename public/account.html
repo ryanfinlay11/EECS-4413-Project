@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ryan's Hockey Shop</title>
+    <link rel="stylesheet" href="/styles/account.css">
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/014/919/584/original/hockey-puck-3d-render-icon-png.png" type="image/png">
+  </head>
+  <body>
+
+    <div id="top-bar">
+      <div id="logo">Ryan's Hockey Shop</div>
+      <div id="nav-buttons">
+        <a href="/">
+          <button id="homeButton">Home</button>
+        </a>
+        <a href="/cart.html">
+          <button id="cartButton" onclick="">
+          <img src="https://cdn-icons-png.freepik.com/512/1413/1413908.png" alt="cart" id="cartImage">
+        </a>
+        </button>
+      </div>
+    </div>
+
+    <div id="accountInfo">
+      <p id="accountTitle">Account Information</p>
+      <p class="label">Username</p>
+      <input type="text" id="username">
+      <p class="label">Password</p>
+      <input type="text" id="password">
+      <p class="label">Credit Card Number</p>
+      <input type="text" id="cc">
+      <p class="label">Shipping Address</p>
+      <input type="text" id="address">
+      <button id="saveChanges" onclick="updateAccount()">Save Changes</button>
+      <button id="logOut" onclick="logOut()">Log Out</button>
+    </div>
+
+    <script src="/scripts/account.js"></script>
+  </body>
+</html>

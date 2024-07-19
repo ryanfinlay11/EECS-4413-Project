@@ -4,23 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ryan's Hockey Shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/014/919/584/original/hockey-puck-3d-render-icon-png.png" type="image/png">
   </head>
   <body>
 
     <div id="top-bar">
       <div id="logo">Ryan's Hockey Shop</div>
       <div id="nav-buttons">
-        <button id="loginButton" onclick="login()">ryan31</button>
-        <button id="cartButton" onclick="showItemDetails('L')">Cart</button>
+        <button id="accountButton" onclick="showModal('account')">Login</button>
+        <a href="/cart.html">
+          <button id="cartButton" onclick="">
+            <img src="https://cdn-icons-png.freepik.com/512/1413/1413908.png" alt="cart" id="cartImage">
+          </button>
+        </a>
       </div>
     </div>
 
     <div id="control-bar">
       <select id="equipment-type">
         <option value="allEquipment">All Equipment</option>
-        <option value="playerEquipment">Player Equipment</option>
-        <option value="goalieEquipment">Goalie Equipment</option>
+        <option value="player">Player Equipment</option>
+        <option value="goalie">Goalie Equipment</option>
       </select>
       <select id="sorting-type">
         <option value="sortAlphabetical">Sort by alphabetical</option>
@@ -29,16 +34,62 @@
       </select>
     </div>
 
-    <div id="grid-container"></div>
+    <div id="loading-image-container">
+      <img id="loading-image" src="https://i.gifer.com/4Ybz.gif" alt="loading">
+      <p id="loading-text">Loading ...</p>
+    </div>
+
+    <div id="grid-container"> </div>
 
     <div id="item-modal" class="modal">
       <div class="modal-content">
-        <span class="close" onclick="hideModal()">&times;</span>
+        <span class="close" onclick="hideModals()">&times;</span>
         <div id="modal-item-info"></div>
         <button id="add-to-cart" onclick="addToCart()">Add to Cart</button>
       </div>
     </div>
 
-    <script src="test.js"></script>
+    <div id="account-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModals()">&times;</span>
+        <div id="loginButtons">
+          <button id="loginToExistingAccount" onclick="showModal('login')">Login</button>
+          <button id="registerAccount" onclick="showModal('register')">Register</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModals()">&times;</span>
+        <div id="loginInfo">
+          <p class="input-label">Username</p>
+          <input type="text" id="login-username">
+          <p class="input-label">Password</p>
+          <input type="password" id="login-password">
+          <button id="loginButton" onclick="login()">Login</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="register-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModals()">&times;</span>
+        <div id="registerInfo">
+          <p class="input-label">Username</p>
+          <input type="text" id="register-username">
+          <p class="input-label">Password</p>
+          <input type="password" id="register-password">
+          <p class="input-label">Credit Card Number</p>
+          <p class="cc-example">Format: XXXX-XXXX-XXXX-XXXX</p>
+          <input type="text" id="register-creditcard">
+          <p class="input-label">Shipping Address</p>
+          <input type="text" id="register-address">
+          <button id="registerButton" onclick="register()">Register</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/scripts/index.js"></script>
   </body>
 </html>

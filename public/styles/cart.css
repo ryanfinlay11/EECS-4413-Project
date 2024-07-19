@@ -1,0 +1,134 @@
+body {
+  background-color: white;
+  overflow-x: hidden;
+} 
+  
+/* Header */
+
+#top-bar {
+  background-image: url('https://dktix1rrcd7mv.cloudfront.net/media/images/1920x720/How-to-make-an-ice-rink-blog-header.jpg');
+  background-position: 80% 20%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+  justify-content: space-between;
+}
+
+#logo {
+  flex: 1;
+  color: rgb(238, 0, 0);
+  font-size: 5vw;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.788);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#homeButton, #cartButton {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  box-shadow: none;
+  border: none;
+  background-color: rgb(54, 54, 54);
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cartButton {
+  width: 75px;
+}
+
+#loginButton:hover, #cartButton:hover {
+  background-color: rgb(105, 105, 105);
+}
+
+#cartImage {
+  width: 30px;
+  margin-top: 5px;
+  filter: invert(1);
+}
+
+/* Cart */
+
+#container {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#cart {
+  width: 50%;
+}
+
+#cartTitle {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  width: 60%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
+}
+
+#quantity, #product, #price{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#quantity, #price {
+  width: 20%;
+}
+
+#product {
+  width: 60%;
+}
+
+.quantity, .price {
+  text-align: center;
+}
+
+.quantity, .name, .price {
+  font-size: 20px;
+}
+
+.quantity {
+  width: 50px;
+  text-align: center;
+}
+
+.productImage {
+  max-height: 100px;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+}
+
+.nameText {
+  margin-left: 20px;
+}
