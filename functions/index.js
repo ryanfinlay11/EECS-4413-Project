@@ -7,6 +7,8 @@ const { getAllProducts } = require('./logic/products');
 
 const { login, register, updateAccount } = require('./logic/users');
 
+const { createOrder } = require('./logic/orders');
+
 app.use(express.json());
 
 app.post('/api/getAllProducts', async (req, res) => {
@@ -52,6 +54,18 @@ app.post('/api/updateAccount', async (req, res) => {
     catch (error) {
         console.error(`Server error registering: ${error}`);
         res.status(500).json({ error: 'Server error registering' });
+    }
+});
+
+app.post('/api/checkout', async (req, res) => {
+    try {
+        const response = await createOrder(req.body);
+
+        res.json(response);
+    }
+    catch (error) {
+        console.error(`Server error checking out: ${error}`);
+        res.status(500).json({ error: 'Server error checking out' });
     }
 });
 

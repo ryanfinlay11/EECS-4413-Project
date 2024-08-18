@@ -5,14 +5,14 @@ initialize();
 // Helper functions
 
 function initialize() {
-  if (localStorage.getItem('cart') === null) {
+  if (localStorage.getItem('cart') === null || JSON.parse(localStorage.getItem('cart')).length === 0) {
     alert("Your cart is empty");
     window.location.href = '/';
   }
   else {
     cart = JSON.parse(localStorage.getItem('cart'));
 
-    cart = addQuantities(cart);
+    cart = cart.filter(item => item.occurance > 0);
 
     console.log(cart);
     
@@ -35,38 +35,6 @@ function initialize() {
 
     updateCost();
   }
-}
-
-function addQuantities(cart) {
-  for (let item of cart) {
-    item['occurance'] = findOccurance(item, cart);
-  }
-
-  return removeDuplicates(cart);
-}
-
-function findOccurance(item, cart) {
-  let occurance = 0;
-  
-  for (const cartItem of cart) {
-    if (cartItem.id === item.id) {
-      occurance++;
-    }
-  }
-  
-  return occurance;
-}
-
-function removeDuplicates(cart) {
-  let uniqueItems = [];
-  
-  for (const item of cart) {
-    if (!uniqueItems.some(i => i.id === item.id)) {
-      uniqueItems.push(item);
-    }
-  }
-  
-  return uniqueItems;
 }
 
 function getItemByID(id) {
@@ -97,6 +65,94 @@ function updateCost() {
   console.log("updated cost");
 }
 
+function continueShopping() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function openCheckoutModal() {
+  for (let item of cart) {
+    if (item.occurance < 0) {
+      return alert("Quantity cannot be negative");
+    }
+    if (item.occurance > item.quantity) {
+      return alert(`There are only ${item.quantity} of ${item.name} left in stock`);
+    }
+  }
+
+  if (localStorage.getItem('user') === null) {
+    alert("Please login or register before checking out");
+    return window.location.href = '/';
+  }
+
+  document.getElementById('register-modal').style.display = 'block';
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  document.getElementById('register-username').value = user.username;
+  document.getElementById('register-creditcard').value = user.creditCard;
+  document.getElementById('register-address').value = user.address;
+  
+  document.getElementById('total-cost').innerHTML = document.getElementById('total').innerHTML;
+}
+
+function hideModal() {
+  document.getElementById('register-modal').style.display = 'none';
+}
+
+async function confirmOrder() {
+  const info = {
+    userID: JSON.parse(localStorage.getItem('user')).userID,
+    creditCard: document.getElementById('register-creditcard').value,
+    address: document.getElementById('register-address').value,
+    total: document.getElementById('total').innerHTML,
+    items: cart
+  };
+
+  try {
+    const data = await postRequest('checkout', info);
+
+    if (data) {
+      if (!data.success) {
+        console.log("Failed");
+        alert(data.message);
+      }
+      else {
+        console.log("Success");
+        alert(data.message);
+        localStorage.setItem('cart', JSON.stringify([]));
+        window.location.href = '/';
+      }
+    }
+    else {
+      alert("An error occurred");
+      console.error("Error checking out");
+    }
+  }
+  catch (error) {
+    alert("An error occurred");
+    console.error("Error checking out");
+  }
+}
+
+async function postRequest(functionName, body) {
+  try {
+    const response = await fetch('/api/' + functionName, { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } 
+  catch (error) {
+    console.error('Error: ', error);
+  }
+}
+
 // Event listener to detect when the quantity of an item is changed
 document.addEventListener('input', function(event) {
   if (event.target.classList.contains('quantity')) {
@@ -105,12 +161,13 @@ document.addEventListener('input', function(event) {
     const quantity = event.target.value;
 
     let item = getItemByID(itemID);
-    item.occurance = quantity;
+    item.occurance = parseInt(quantity);
     const cost = item.price;
 
     price.innerHTML = `$${(cost * quantity).toFixed(2)}`;
 
     updateCost();
+    console.log(cart);
   }
 });
 

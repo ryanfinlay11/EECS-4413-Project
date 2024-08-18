@@ -40,11 +40,26 @@
 
     <div class="buttons">
       <a href='/'>
-        <button id="continueShopping">Continue Shopping</button>
+        <button id="continueShopping" onclick="continueShopping()">Continue Shopping</button>
       </a>
-      <a href='/checkout.html'>
-        <button id="checkout">Checkout</button>
-      </a>
+      <button id="checkout" onclick="openCheckoutModal()">Checkout</button>
+    </div>
+
+    <div id="register-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div id="registerInfo">
+          <p class="input-label">Username</p>
+          <input type="text" id="register-username" readonly>
+          <p class="input-label">Credit Card Number</p>
+          <p class="cc-example">Format: XXXX-XXXX-XXXX-XXXX</p>
+          <input type="text" id="register-creditcard">
+          <p class="input-label">Shipping Address</p>
+          <input type="text" id="register-address">
+          <p class="input-label" id="total-cost">Total Cost: </p>
+          <button id="registerButton" onclick="confirmOrder()">Confirm Order</button>
+        </div>
+      </div>
     </div>
 
     <script src="/scripts/cart.js"></script>

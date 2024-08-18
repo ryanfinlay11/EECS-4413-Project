@@ -102,8 +102,8 @@ function hideModals() {
 
   document.getElementById('register-username').value = '';
   document.getElementById('register-password').value = '';
-  // document.getElementById('register-creditcard').value = '';
-  // document.getElementById('register-address').value = '';
+  document.getElementById('register-creditcard').value = '';
+  document.getElementById('register-address').value = '';
 }
 
 function addToCart() {
@@ -111,8 +111,22 @@ function addToCart() {
 
   // add item to local storage
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  cart.push(selectedItem);
-  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // check if item is already in cart
+  let added = false;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id === selectedItem.id) {
+    cart[i].occurance++;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    added = true;
+    }
+  }
+
+  if (!added) {
+    selectedItem.occurance = 1;
+    cart.push(selectedItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
 
   console.log("cart:", cart);
 
