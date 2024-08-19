@@ -117,6 +117,7 @@ async function confirmOrder() {
 
   const info = {
     userID: JSON.parse(localStorage.getItem('user')).userID,
+    username: document.getElementById('register-username').value,
     creditCard: document.getElementById('register-creditcard').value,
     address: document.getElementById('register-address').value,
     total: document.getElementById('total').innerHTML,

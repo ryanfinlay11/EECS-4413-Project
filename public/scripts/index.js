@@ -17,8 +17,10 @@ let filteredItems = [];
 
 let selectedItem = null;
 
-loadItems();
-initalizeLogin();
+document.addEventListener('DOMContentLoaded', (event) => {
+  loadItems();
+  initalizeLogin();
+});
 
 // onclick functions
 
@@ -178,6 +180,8 @@ function initalizeLogin() {
       window.location.href = "/account.html";
     }
   }
+
+  checkIfAdmin(user);
 }
 
 function simulateDelay(ms) {
@@ -292,6 +296,15 @@ function filterThenSort(equipmentType, sortingType) {
   }
 
   setGridItems(filteredItems);
+}
+
+function checkIfAdmin(user) {
+  if (user && user.isAdmin) {
+    document.getElementById('adminPage').style.display = 'block';
+  }
+  else {
+    document.getElementById('adminPage').style.display = 'none';
+  }
 }
 
 // Event listeners

@@ -7,7 +7,7 @@ const { getAllProducts } = require('./logic/products');
 
 const { login, register, updateAccount } = require('./logic/users');
 
-const { createOrder } = require('./logic/orders');
+const { createOrder, getAllOrders } = require('./logic/orders');
 
 app.use(express.json());
 
@@ -66,6 +66,18 @@ app.post('/api/checkout', async (req, res) => {
     catch (error) {
         console.error(`Server error checking out: ${error}`);
         res.status(500).json({ error: 'Server error checking out' });
+    }
+});
+
+app.post('/api/getAllOrders', async (req, res) => {
+    try {
+        const response = await getAllOrders();
+
+        res.json(response);
+    }
+    catch (error) {
+        console.error(`Server error getting orders: ${error}`);
+        res.status(500).json({ error: 'Server error getting orders' });
     }
 });
 

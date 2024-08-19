@@ -1,0 +1,113 @@
+body {
+  background-color: white;
+  overflow-x: hidden;
+} 
+  
+/* Header */
+
+#top-bar {
+  background-image: url('https://dktix1rrcd7mv.cloudfront.net/media/images/1920x720/How-to-make-an-ice-rink-blog-header.jpg');
+  background-position: 80% 20%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+  justify-content: space-between;
+}
+
+#logo {
+  flex: 1;
+  color: rgb(238, 0, 0);
+  font-size: 5vw;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.788);
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#homeButton, #cartButton {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  box-shadow: none;
+  border: none;
+  background-color: rgb(54, 54, 54);
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#cartButton {
+  width: 75px;
+}
+
+#loginButton:hover, #cartButton:hover {
+  background-color: rgb(105, 105, 105);
+}
+
+#cartImage {
+  width: 30px;
+  margin-top: 5px;
+  filter: invert(1);
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#salesHistory, #inventoryEditing, #userAccounts {
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  box-shadow: none;
+  border: none;
+  background-color: rgb(187, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#salesHistory {
+  margin-top: 30px;
+}
+
+#content {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(255, 102, 0);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}

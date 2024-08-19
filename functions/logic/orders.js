@@ -1,3 +1,4 @@
+const { user } = require('firebase-functions/v1/auth');
 const { get, update } = require('../db/db');
 
 const crypto = require("crypto");
@@ -8,12 +9,13 @@ async function createOrder(orderInfo) {
       return { success: false, message: 'Not all fields complete' };
     }
     else if (!orderInfo.creditCard.match(/^\d{4}-\d{4}-\d{4}-\d{4}$/)) {
-      return { success: false, message: 'Credit card number must be in the format: XXXX-XXXX-XXXX-XXXX' };
+      return { success: false, message: 'Credit card authorization failed' };
     }
 
     const order = {
       orderID: crypto.randomUUID(),
       userID: orderInfo.userID,
+      username: orderInfo.username,
       creditCard: orderInfo.creditCard,
       address: orderInfo.address,
       total: orderInfo.total.match(/\$([0-9,.]+)/)[1],
@@ -45,6 +47,19 @@ async function createOrder(orderInfo) {
   }
 }
 
+async function getAllOrders() {
+  try {
+    const orders = await get('/orders');
+
+    return { success: true, message: orders };
+  }
+  catch (error) {
+    console.error(`Error getting orders: ${error}`);
+    return JSON.stringify({ error: 'Error getting orders' });
+  }
+}
+
 module.exports = {
-  createOrder
+  createOrder,
+  getAllOrders
 };
