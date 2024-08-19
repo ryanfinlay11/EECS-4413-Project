@@ -4,6 +4,13 @@ const crypto = require("crypto");
 
 async function createOrder(orderInfo) {
   try {
+    if (!orderInfo.address || !orderInfo.creditCard) {
+      return { success: false, message: 'Not all fields complete' };
+    }
+    else if (!orderInfo.creditCard.match(/^\d{4}-\d{4}-\d{4}-\d{4}$/)) {
+      return { success: false, message: 'Credit card number must be in the format: XXXX-XXXX-XXXX-XXXX' };
+    }
+
     const order = {
       orderID: crypto.randomUUID(),
       userID: orderInfo.userID,
