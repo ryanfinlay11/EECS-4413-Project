@@ -66,7 +66,20 @@ function updateCost() {
 }
 
 function continueShopping() {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  let isEmpty = true;
+  for (let item of cart) {
+    if (item.occurance > 0) {
+      isEmpty = false;
+      break;
+    }
+  }
+
+  if (isEmpty) {
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+  else {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
 }
 
 function openCheckoutModal() {
@@ -100,6 +113,8 @@ function hideModal() {
 }
 
 async function confirmOrder() {
+  document.getElementById('registerButton').disabled = true;
+
   const info = {
     userID: JSON.parse(localStorage.getItem('user')).userID,
     creditCard: document.getElementById('register-creditcard').value,
@@ -127,10 +142,13 @@ async function confirmOrder() {
       alert("An error occurred");
       console.error("Error checking out");
     }
+
+    document.getElementById('registerButton').disabled = false;
   }
   catch (error) {
     alert("An error occurred");
     console.error("Error checking out");
+    document.getElementById('registerButton').disabled = false;
   }
 }
 

@@ -37,48 +37,71 @@ function showItemDetails(item) {
 }
 
 async function login() {
-  const data = await postRequest('login', {
-    username: document.getElementById('login-username').value,
-    password: document.getElementById('login-password').value
-  });
+  try {
+    document.getElementById('loginButton').disabled = true;
 
-  if (data) {
-    if (!data.success) {
-      alert(data.message);
+    const data = await postRequest('login', {
+      username: document.getElementById('login-username').value,
+      password: document.getElementById('login-password').value
+    });
+
+    if (data) {
+      if (!data.success) {
+        alert(data.message);
+      }
+      else {
+        hideModals();
+        localStorage.setItem('user', JSON.stringify(data.message));
+        initalizeLogin();
+        alert("Login successful!");
+      }
     }
     else {
-      hideModals();
-      localStorage.setItem('user', JSON.stringify(data.message));
-      initalizeLogin();
-      alert("Login successful!");
+      console.error("Error logging in");
     }
+
+    document.getElementById('loginButton').disabled = false;
   }
-  else {
-    console.error("Error logging in");
+  catch (error) {
+    alert("Error logging in");
+    console.error(error);
+    document.getElementById('loginButton').disabled = false;
   }
 }
 
 async function register() {
-  const data = await postRequest('register', {
-    username: document.getElementById('register-username').value,
-    password: document.getElementById('register-password').value,
-    creditCard: document.getElementById('register-creditcard').value,
-    address: document.getElementById('register-address').value
-  });
+  try {
+    document.getElementById('registerButton').disabled = true;
+    
+    const data = await postRequest('register', {
+      username: document.getElementById('register-username').value,
+      password: document.getElementById('register-password').value,
+      creditCard: document.getElementById('register-creditcard').value,
+      address: document.getElementById('register-address').value
+    });
 
-  if (data) {
-    if (!data.success) {
-      alert(data.message);
+    if (data) {
+      if (!data.success) {
+        alert(data.message);
+      }
+      else {
+        hideModals();
+        localStorage.setItem('user', JSON.stringify(data.message));
+        initalizeLogin();
+        alert("Registration successful!")
+      }
     }
     else {
-      hideModals();
-      localStorage.setItem('user', JSON.stringify(data.message));
-      initalizeLogin();
-      alert("Registration successful!")
+      alert("Error registering");
+      console.error("Error registering");
     }
+
+    document.getElementById('registerButton').disabled = false;
   }
-  else {
-    console.error("Error registering");
+  catch (error) {
+    alert("Error registering");
+    console.error(error);
+    document.getElementById('registerButton').disabled = false;
   }
 }
 
