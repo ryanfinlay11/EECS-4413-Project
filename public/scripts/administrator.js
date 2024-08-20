@@ -28,7 +28,6 @@ async function salesHistory() {
     console.error(`Error getting sales history: ${error}`);
   }
 
-
   document.getElementById("content").innerHTML = content;
 }
 
@@ -45,7 +44,7 @@ async function inventoryEditing() {
       <button class="edit" onclick="editQuantity('${items[key].itemID}')">Edit Quantity</button><br><br>`
     }
 
-    content += `<button class="add" onclick="addProduct()">Add Product</button><br>`;
+    content += `<button class="add" onclick="addProductInputForm()">Add Product</button><br>`;
   }
   catch (error) {
     content = 'No inventory available';
@@ -103,29 +102,38 @@ async function editQuantity(itemID) {
   }
 }
 
+async function addProductInputForm() {
+  let content = `<input class="inputBox" type="text" id="name" placeholder="Name"><br>
+  <input class="inputBox" type="text" id="equipmentType" placeholder='Equipment Type ("goalie" or "player")'><br>
+  <input class="inputBox" type="text" id="price" placeholder="Price"><br>
+  <input class="inputBox" type="text" id="quantity" placeholder="Quantity"><br>
+  <input class="inputBox" type="text" id="image" placeholder="Image URL"><br>
+  <input class="inputBox" type="text" id="description" placeholder="Description"><br><br>
+  <button class="add" onclick="addProduct()">Add Product</button><br>`;
+
+  document.getElementById("content").innerHTML = content;
+}
+
 async function addProduct() {
-  function promptForInput(message, validationFn) {
-    const input = prompt(message);
-    if (validationFn(input)) {
-      return input;
-    }
-    return promptForInput(message, validationFn);
+  const name = document.getElementById('name').value;
+  const equipmentType = document.getElementById('equipmentType').value;
+  const price = document.getElementById('price').value;
+  const quantity = document.getElementById('quantity').value;
+  const image = document.getElementById('image').value;
+  const description = document.getElementById('description').value;
+
+  if (name === "" || equipmentType === "" || price === "" || quantity === "" || image === "" || description === "") {
+    return alert("All fields must be filled out");
   }
-
-  const name = promptForInput("Enter the name of the product", input => input !== null);
-
-  const equipmentType = promptForInput(
-    'Enter the equipment type ("goalie" or "player")',
-    input => input !== null && (input === "goalie" || input === "player")
-  );
-
-  const price = promptForInput("Enter the price", input => input !== null && !isNaN(input) && input >= 0);
-
-  const quantity = promptForInput("Enter the quantity", input => input !== null && !isNaN(input) && input >= 0);
-
-  const image = promptForInput("Enter the image URL", input => input !== null);
-
-  const description = promptForInput("Enter the description", input => input !== null);
+  if (equipmentType !== "goalie" && equipmentType !== "player") {
+    return alert('Equipment type must be "goalie" or "player"');
+  }
+  if (isNaN(price) || isNaN(quantity)) {
+    return alert("Price and quantity must be numbers");
+  }
+  if (price <= 0 || quantity < 0) {
+    return alert("Price and quantity must be positive");
+  }
 
   try {
     const data = await postRequest('addProduct', { name, equipmentType, price, quantity, image, description });
