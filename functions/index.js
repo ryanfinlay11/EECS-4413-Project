@@ -3,9 +3,9 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const { getAllProducts } = require('./logic/products');
+const { getAllProducts, editQuantity, addProduct } = require('./logic/products');
 
-const { login, register, updateAccount } = require('./logic/users');
+const { login, register, updateAccount, getAllUsers, updateAccountAttribute } = require('./logic/users');
 
 const { createOrder, getAllOrders } = require('./logic/orders');
 
@@ -78,6 +78,54 @@ app.post('/api/getAllOrders', async (req, res) => {
     catch (error) {
         console.error(`Server error getting orders: ${error}`);
         res.status(500).json({ error: 'Server error getting orders' });
+    }
+});
+
+app.post('/api/editQuantity', async (req, res) => {
+    try {
+        const response = await editQuantity(req.body);
+
+        res.json(response);
+    }
+    catch (error) {
+        console.error(`Server error editing quantity: ${error}`);
+        res.status(500).json({ error: 'Server error editing quantity' });
+    }
+});
+
+app.post('/api/addProduct', async (req, res) => {
+    try {
+        const response = await addProduct(req.body);
+
+        res.json(response);
+    }
+    catch (error) {
+        console.error(`Server error adding product: ${error}`);
+        res.status(500).json({ error: 'Server error adding product' });
+    }
+});
+
+app.post('/api/getAllUsers', async (req, res) => {
+    try {
+        const response = await getAllUsers();
+
+        res.json(response);
+    }
+    catch (error) {
+        console.error(`Server error adding product: ${error}`);
+        res.status(500).json({ error: 'Server error adding product' });
+    }
+});
+
+app.post('/api/updateAccountAttribute', async (req, res) => {
+    try {
+        const response = await updateAccountAttribute(req.body);
+
+        res.json(response);
+    }
+    catch (error) {
+        console.error(`Server error editing account attribute: ${error}`);
+        res.status(500).json({ error: 'Server error editing account attribute' });
     }
 });
 

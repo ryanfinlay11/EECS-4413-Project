@@ -112,8 +112,47 @@ async function updateAccount(userID, oldUsername, newUsername, newPassword, newC
   }
 }
 
+async function getAllUsers() {
+  try {
+    const users = await get('/users');
+    return { success: true, message: users};
+  }
+  catch (error) {
+    return { success: false, message: error};
+  }
+}
+
+async function updateAccountAttribute(info){
+  try {
+    let newAttributeType = "";
+    if (info.changeType == "credit card") {
+      newAttributeType = "creditCard";
+    }
+    else if (info.changeType == "admin") {
+      newAttributeType = "isAdmin";
+    }
+    else {
+      newAttributeType = info.changeType;
+    }
+
+    let newAttributeValue = info.newValue;
+    if (info.changeType == "admin") {
+      newAttributeValue = (info.newValue == "true");
+    }
+
+    await update('/users/' + info.username, { [newAttributeType]: newAttributeValue });
+    return JSON.stringify({ success: true, message: "Account updated" });
+  }
+  catch (error) {
+    console.error(`Error updating account attribute: ${error}`);
+    return JSON.stringify({ error: 'Error updating account attribute' });
+  }
+}
+
 module.exports = {
   login,
   register,
-  updateAccount
+  updateAccount,
+  getAllUsers,
+  updateAccountAttribute
 };

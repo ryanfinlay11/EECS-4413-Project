@@ -1,4 +1,6 @@
-const { get } = require('../db/db');
+const { get, update } = require('../db/db');
+
+const crypto = require("crypto");
 
 async function getAllProducts() {
   try {
@@ -19,6 +21,39 @@ async function getAllProducts() {
   }
 }
 
+async function editQuantity(item) {
+  try {
+    await update('/products/' + item.itemID, { "quantity": parseInt(item.quantity)} );
+    return JSON.stringify({ success: true, message: "Quantity updated" });
+  }
+  catch (error) {
+    console.error(`Error editing quantity: ${error}`);
+    return JSON.stringify({ error: 'Error editing quantity' });
+  }
+}
+
+async function addProduct(product) {
+  try {
+    const newProduct = {
+      itemID: crypto.randomUUID(),
+      name: product.name,
+      equipmentType: product.equipmentType,
+      description: product.description,
+      image: product.image,
+      price: parseFloat(product.price),
+      quantity: parseInt(product.quantity)
+    }
+    await update('/products/' + newProduct.itemID, newProduct);
+    return JSON.stringify({ success: true, message: "Product added" });
+  }
+  catch (error) {
+    console.error(`Error adding product: ${error}`);
+    return JSON.stringify({ error: 'Error adding product' });
+  }
+}
+
 module.exports = {
-  getAllProducts
+  getAllProducts,
+  editQuantity,
+  addProduct
 };
