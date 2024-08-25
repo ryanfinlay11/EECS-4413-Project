@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // onclick functions
 
+// Shows the item details modal
 function showItemDetails(item) {
   const modalContent = document.getElementById('modal-item-info');
   
@@ -38,6 +39,7 @@ function showItemDetails(item) {
   itemModal.style.display = 'block';
 }
 
+// Logs the user in
 async function login() {
   try {
     document.getElementById('loginButton').disabled = true;
@@ -71,6 +73,7 @@ async function login() {
   }
 }
 
+// Registers the user
 async function register() {
   try {
     document.getElementById('registerButton').disabled = true;
@@ -107,6 +110,7 @@ async function register() {
   }
 }
 
+// Shows either the account, login, or register modal
 function showModal(type) {
   hideModals();
   if (type === 'account') accountModal.style.display = 'block';
@@ -114,6 +118,7 @@ function showModal(type) {
   else if (type === 'register') registerModal.style.display = 'block';
 }
 
+// Hide all modals
 function hideModals() {
   // hide all modals
   itemModal.style.display = 'none';
@@ -131,6 +136,7 @@ function hideModals() {
   document.getElementById('register-address').value = '';
 }
 
+// Adds the selected item to the cart
 function addToCart() {
   console.log("added " + selectedItem.name + " to cart!");
 
@@ -170,6 +176,7 @@ function addToCart() {
 
 // Helper functions
 
+// Initializes login
 function initalizeLogin() {
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -184,15 +191,11 @@ function initalizeLogin() {
   checkIfAdmin(user);
 }
 
-function simulateDelay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
+// Loads all items from the database
 async function loadItems() {
   console.log("Loading items");
 
   try {
-    // await simulateDelay(100000);
     // send post request to get items
     const data = await postRequest('getAllProducts', {});
 
@@ -221,6 +224,7 @@ async function loadItems() {
   }
 }
 
+// POST request helper function
 async function postRequest(functionName, body) {
   try {
     const response = await fetch('/api/' + functionName, { 
@@ -240,6 +244,7 @@ async function postRequest(functionName, body) {
   }
 }
 
+// Shows all the items on the page
 function setGridItems(items) {
   gridContainer.innerHTML = '';
 
@@ -272,6 +277,7 @@ function setGridItems(items) {
   });
 }
 
+// Filters and sorts the items
 function filterThenSort(equipmentType, sortingType) {
   if (equipmentType == "allEquipment") {
     filteredItems = items;
@@ -298,6 +304,7 @@ function filterThenSort(equipmentType, sortingType) {
   setGridItems(filteredItems);
 }
 
+// Checks if the user is an admin for displaying the button to the admin page
 function checkIfAdmin(user) {
   if (user && user.isAdmin) {
     document.getElementById('adminPage').style.display = 'block';

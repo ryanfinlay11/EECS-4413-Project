@@ -3,6 +3,7 @@ const { get, update } = require('../db/db');
 
 const crypto = require("crypto");
 
+// Creates an order given orderInfo
 async function createOrder(orderInfo) {
   try {
     if (!orderInfo.address || !orderInfo.creditCard) {
@@ -47,6 +48,7 @@ async function createOrder(orderInfo) {
   }
 }
 
+// Returns all orders
 async function getAllOrders() {
   try {
     const orders = await get('/orders');

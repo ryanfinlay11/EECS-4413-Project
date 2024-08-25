@@ -7,6 +7,7 @@ initialize();
 
 // onclick functions
 
+// Update account information
 async function updateAccount() {
   const data = await postRequest('updateAccount', {
     userID: JSON.parse(localStorage.getItem('user')).userID,
@@ -31,6 +32,7 @@ async function updateAccount() {
   }
 }
 
+// Log out
 function logOut() {
   // confirm log out
   if (!confirm(" Your cart will be cleared. Are you sure you want to log out?")) return;
@@ -42,6 +44,7 @@ function logOut() {
 
 // Helper functions
 
+// Initialize account page with user data
 function initialize() {
   if (localStorage.getItem('user') === null) {
     alert("You must be logged in to view your account");
@@ -59,6 +62,7 @@ function initialize() {
   }
 }
 
+// Clear user data from page
 function clearUserDataFromPage() {
   username.value = '';
   password.value = '';
@@ -66,6 +70,7 @@ function clearUserDataFromPage() {
   address.value = '';
 }
 
+// POST request helper function
 async function postRequest(functionName, body) {
   try {
     const response = await fetch('/api/' + functionName, { 

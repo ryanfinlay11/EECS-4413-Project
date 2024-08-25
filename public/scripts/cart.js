@@ -4,6 +4,7 @@ initialize();
 
 // Helper functions
 
+// Initialize cart page with cart data
 function initialize() {
   if (localStorage.getItem('cart') === null || JSON.parse(localStorage.getItem('cart')).length === 0) {
     alert("Your cart is empty");
@@ -37,6 +38,7 @@ function initialize() {
   }
 }
 
+// Returns the item in the cart with the given ID
 function getItemByID(id) {
   for (const item of cart) {
     if (item.itemID === id) {
@@ -45,6 +47,7 @@ function getItemByID(id) {
   }
 }
 
+// Updates the cost of the cart when the quantity of an item is changed
 function updateCost() {
   const subtotal = document.getElementById('subtotal');
   const hst = document.getElementById('hst');
@@ -65,6 +68,7 @@ function updateCost() {
   console.log("updated cost");
 }
 
+// Returns to the home page
 function continueShopping() {
   let isEmpty = true;
   for (let item of cart) {
@@ -82,6 +86,7 @@ function continueShopping() {
   }
 }
 
+// Opens the checkout modal
 function openCheckoutModal() {
   for (let item of cart) {
     if (item.occurance < 0) {
@@ -108,10 +113,12 @@ function openCheckoutModal() {
   document.getElementById('total-cost').innerHTML = document.getElementById('total').innerHTML;
 }
 
+// Closes the checkout modal
 function hideModal() {
   document.getElementById('register-modal').style.display = 'none';
 }
 
+// Submits the order
 async function confirmOrder() {
   document.getElementById('registerButton').disabled = true;
 
@@ -153,6 +160,7 @@ async function confirmOrder() {
   }
 }
 
+// POST request helper function
 async function postRequest(functionName, body) {
   try {
     const response = await fetch('/api/' + functionName, { 

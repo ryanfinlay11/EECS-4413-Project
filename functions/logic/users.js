@@ -2,6 +2,7 @@ const { get, update, deleteItem } = require('../db/db');
 
 const crypto = require("crypto");
 
+// Logs in a user given a username and password
 async function login(username, password) {
   try {
     if (!username || !password) {
@@ -25,6 +26,7 @@ async function login(username, password) {
   }
 }
 
+// Creates a new user given a username, password, credit card, and address
 async function register(username, password, creditCard, address) {
   try {
     if (!username || !password || !creditCard || !address) {
@@ -60,6 +62,7 @@ async function register(username, password, creditCard, address) {
   }
 }
 
+// Updates a user's account given their userID, old username, new username, new password, new credit card, and new address
 async function updateAccount(userID, oldUsername, newUsername, newPassword, newCreditCard, newAddress) {
   try {
     if (!newUsername || !newPassword || !newCreditCard || !newAddress) {
@@ -112,6 +115,7 @@ async function updateAccount(userID, oldUsername, newUsername, newPassword, newC
   }
 }
 
+// Returns all users
 async function getAllUsers() {
   try {
     const users = await get('/users');
@@ -122,6 +126,7 @@ async function getAllUsers() {
   }
 }
 
+// Updates a user's account attribute given their username, the attribute to change, and the new value
 async function updateAccountAttribute(info){
   try {
     let newAttributeType = "";

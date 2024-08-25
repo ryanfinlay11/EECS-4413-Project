@@ -12,10 +12,7 @@ if (process.env.FUNCTIONS_EMULATOR) {
 const db = admin.database();
 
 /**
- * Retrieves data from the database at refPath
- * 
- * @param {string} refPath 
- * @returns {any}
+ * Retrieves data from refPath in the database
  */
 async function get(refPath) {
   try {
@@ -30,10 +27,7 @@ async function get(refPath) {
 }
 
 /**
- * Updates data refPath with newValue in the database
- *
- * @param {string} refPath
- * @param {any} newValue
+ * Updates data in the database at refPath with newValue
  */
 async function update(refPath, newValue) {
   try {
@@ -45,6 +39,9 @@ async function update(refPath, newValue) {
   }
 }
 
+/**
+ * Deletes data in the database at refPath
+ */
 async function deleteItem(refPath) {
   try {
     await db.ref(refPath).remove();

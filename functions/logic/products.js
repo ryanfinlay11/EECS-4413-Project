@@ -2,6 +2,7 @@ const { get, update } = require('../db/db');
 
 const crypto = require("crypto");
 
+// Returns all products
 async function getAllProducts() {
   try {
     const products = await get('/products');
@@ -21,6 +22,7 @@ async function getAllProducts() {
   }
 }
 
+// Edits the quantity of a product
 async function editQuantity(item) {
   try {
     await update('/products/' + item.itemID, { "quantity": parseInt(item.quantity)} );
@@ -32,6 +34,7 @@ async function editQuantity(item) {
   }
 }
 
+// Adds a product
 async function addProduct(product) {
   try {
     const newProduct = {

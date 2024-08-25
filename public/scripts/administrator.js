@@ -5,6 +5,7 @@ window.onload = function() {
   }
 }
 
+// Displays the sales history
 async function salesHistory() {
   let content = "";
   try {
@@ -31,6 +32,7 @@ async function salesHistory() {
   document.getElementById("content").innerHTML = content;
 }
 
+// Displays the inventory
 async function inventoryEditing() {
   let content = "";
   try {
@@ -54,6 +56,7 @@ async function inventoryEditing() {
   document.getElementById("content").innerHTML = content;
 }
 
+// Displays the user accounts
 async function userAccounts() {
   let content = "";
   try {
@@ -76,6 +79,7 @@ async function userAccounts() {
   document.getElementById("content").innerHTML = content;
 }
 
+// Edits the quantity of a product
 async function editQuantity(itemID) {
   const quantity = prompt("Enter the new quantity");
   if (quantity === null) {
@@ -102,6 +106,7 @@ async function editQuantity(itemID) {
   }
 }
 
+// Opens form to add a product
 async function addProductInputForm() {
   let content = `<input class="inputBox" type="text" id="name" placeholder="Name"><br>
   <input class="inputBox" type="text" id="equipmentType" placeholder='Equipment Type ("goalie" or "player")'><br>
@@ -114,6 +119,7 @@ async function addProductInputForm() {
   document.getElementById("content").innerHTML = content;
 }
 
+// Adds a product
 async function addProduct() {
   const name = document.getElementById('name').value;
   const equipmentType = document.getElementById('equipmentType').value;
@@ -152,6 +158,7 @@ async function addProduct() {
   }
 }
 
+// Edits a user's account
 async function editUser(username) {
   const changeType = prompt('Enter the field you would like to change ("password", "credit card", "address", or "admin")');
   if (changeType === null) return alert("No field entered");
@@ -197,6 +204,7 @@ async function editUser(username) {
 
 }
 
+// Post request helper function
 async function postRequest(functionName, body) {
   try {
     const response = await fetch('/api/' + functionName, { 
