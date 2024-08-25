@@ -1,4 +1,3 @@
-const { user } = require('firebase-functions/v1/auth');
 const { get, update } = require('../db/db');
 
 const crypto = require("crypto");
